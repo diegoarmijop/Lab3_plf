@@ -37,10 +37,21 @@ programa_aux: IDENTIFICADOR
 | IDENTIFICADOR ',' programa_aux
 ;
 
-bloque: bloque_constante
-| bloque_tipo
-| bloque_variable
-| bloque_declaracion 
+bloque: bloque_constante bloque_inicio
+| bloque_tipo bloque_inicio
+| bloque_variable bloque_inicio
+| bloque_declaracion bloque_inicio
+| bloque_constante bloque_tipo bloque_inicio
+| bloque_constante bloque_variable bloque_inicio
+| bloque_constante bloque_declaracion bloque_inicio
+| bloque_constante bloque_tipo bloque_variable bloque_inicio
+| bloque_constante bloque_tipo bloque_declaracion bloque_inicio
+| bloque_constante bloque_variable bloque_declaracion bloque_inicio
+| bloque_constante bloque_tipo bloque_variable bloque_declaracion bloque_inicio
+| bloque_tipo bloque_variable bloque_inicio
+| bloque_tipo bloque_declaracion bloque_inicio
+| bloque_tipo bloque_variable bloque_declaracion bloque_inicio
+| bloque_variable bloque_declaracion bloque_inicio
 | bloque_inicio
 ;
 
