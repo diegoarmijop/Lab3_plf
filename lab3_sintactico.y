@@ -30,8 +30,21 @@ exp: ENTERO
 ;
 
 programa: PROGRAMA IDENTIFICADOR ';' bloque '.'
-| '(' IDENTIFICADOR ')' ';' bloque '.'
-#PREGUNTAR COMO HAGO LA CLAUSURA
+| '(' programa_aux ')' ';' bloque '.'
+;
+
+programa_aux: IDENTIFICADOR
+| IDENTIFICADOR ',' programa_aux
+;
+
+bloque: ;
+
+constante: '+' identificador_constante
+| '+' numero_sin_signo
+| '-' identificador_constante
+| '-' numero_sin_signo
+| identificador_constante
+| numero_sin_signo
 ;
 
 identificador_constante: IDENTIFICADOR;
@@ -48,9 +61,12 @@ numero_sin_signo: ENTEROS
 ;
 
 tipo: identificador_tipo
-| '(' IDENTIFICADOR ')'
-| '(' IDENTIFICADOR ',' ')' //FALTA LA CLAUSURA
+| '(' tipo_aux ')'
 | constante RANGO constante
+;
+
+tipo_aux: IDENTIFICADOR
+| IDENTIFICADOR ',' tipo_aux
 ;
 
 identificador_tipo: IDENTIFICADOR
@@ -66,23 +82,19 @@ declaracion_procedimiento_funcion: PROCEDIMIENTO IDENTIFICADOR
 | FUNCION IDENTIFICADOR lista_parametros_formales ':' identificador_tipo
 ;
 
-lista_parametros_formales: '(' IDENTIFICADOR ':' identificador_tipo ')'
-| '(' VARIABLE IDENTIFICADOR ':' identificador_tipo ')'
-| '(' VARIABLE IDENTIFICADOR ',' IDENTIFICADOR ':' identificador_tipo ')' #la CLAUSURA
-| '(' IDENTIFICADOR ',' IDENTIFICADOR ':' identificador_tipo ')'
-| '(' IDENTIFICADOR ':' identificador_tipo ';' IDENTIFICADOR ':' identificador_tipo ')'
-//no esta completa y falta clausura 
+lista_parametros_formales: '(' lista_parametros_formales_aux2 ')' ;
 
-sentencia: identificador_variable ASIGNACION expresion
-| identificador_funcion ASIGNACION expresion
-| identificador_procedimiento
-| identificador_procedimiento lista_parametros_actuales
-| SI expresion ENTONCES sentencia
-| SI expresion ENTONCES sentencia SINO sentencia
-| MIENTRAS expresion HACER sentencia
-| PARA identificador_variable ASIGNACION expresion ABAJO expresion HACER sentencia
-| PARA identificador_variable ASIGNACION expresion A expresion HACER sentencia
-//COMO HAGO LA PALABRA VACIA
+lista_parametros_formales_aux1: IDENTIFICADOR
+| IDENTIFICADOR ',' lista_parametros_formales_aux1
+;
+
+lista_parametros_formales_aux2: lista_parametros_formales_aux1 ':' identificador_tipo
+| VARIABLE lista_parametros_formales_aux1 ':' identificador_tipo
+| lista_parametros_formales_aux1 ':' identificador_tipo lista_parametros_formales_aux2
+| VARIABLE lista_parametros_formales_aux1 ':' identificador_tipo lista_parametros_formales_aux2
+;
+
+sentencia: 
 ;
 
 expresion: expresion_simple
@@ -94,36 +106,25 @@ expresion: expresion_simple
 | expresion_simple MAYOR_IGUAL expresion_simple
 ;
 
-expresion_simple: termino
-| '+' termino
-| '-' termino
-| termino '+' termino
-| termino '-' termino
-| termino O termino
-| '+' termino '+' termino
-| '+' termino '-' termino
-| '+' termino O termino
-| '-' termino '+' termino
-| '-' termino '-' termino
-| '-' termino O termino
-//falta la clausura
+expresion_simple: termino expresion_simple_aux
+| '+' termino expresion_simple_aux
+| '-' termino expresion_simple_aux
 ;
 
-termino: factor
-| factor '*' factor
-| factor '/' factor
-| factor DIVIDIR factor
-| factor MODULO factor
-| factor Y factor
-//PREGUNTAR CLAUSURA
+expresion_simple_aux: '+' termino expresion_simple_aux
+| '-' termino expresion_simple_aux
+| O termino expresion_simple_aux
+| 
 ;
 
-constante: + identificador_constante
-| '+' numero_sin_signo
-| '-' identificador_constante
-| '-' numero_sin_signo
-| identificador_constante
-| numero_sin_signo
+termino: factor termino_aux;
+
+termino_aux: '*' factor termino_aux
+| '/' factor termino_aux
+| DIVIDIR factor termino_aux
+| MODULO factor termino_aux
+| Y factor termino_aux
+| 
 ;
 
 factor: constante_sin_signo
@@ -138,11 +139,17 @@ constante_sin_signo: identificador_constante
 | numero_sin_signo
 ;
 
-lista_parametros_actuales: '(' identificador_variable ')'
-| '(' expresion ')'
-| '(' identificador_procedimiento ')'
-| '(' identificador_funcion ')'
-//no esta completa
+lista_parametros_actuales: '(' lista_parametros_actuales_aux ')' ;
+
+lista_parametros_actuales_aux: identificador_variable
+| identificador_variable ',' lista_parametros_actuales_aux
+| expresion
+| expresion ',' lista_parametros_actuales_aux
+| identificador_procedimiento
+| identificador_procedimiento ',' lista_parametros_actuales_aux
+| identificador_funcion
+| identificador_funcion ',' lista_parametros_actuales_aux
+;
 
 %%
 
