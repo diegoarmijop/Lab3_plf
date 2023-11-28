@@ -27,6 +27,123 @@ exp: ENTERO
 | DECIMAL 
 | EXPONENCIAL
 | IDENTIFICADOR
+;
+
+programa: PROGRAMA IDENTIFICADOR ';' bloque '.'
+| '(' IDENTIFICADOR ')' ';' bloque '.'
+#PREGUNTAR COMO HAGO LA CLAUSURA
+;
+
+identificador_constante: IDENTIFICADOR;
+
+identificador_funcion: IDENTIFICADOR;
+
+identificador_procedimiento: IDENTIFICADOR;
+
+identificador_variable: IDENTIFICADOR;
+
+numero_sin_signo: ENTEROS
+| DECIMAL
+| EXPONENCIAL
+;
+
+tipo: identificador_tipo
+| '(' IDENTIFICADOR ')'
+| '(' IDENTIFICADOR ',' ')' //FALTA LA CLAUSURA
+| constante RANGO constante
+;
+
+identificador_tipo: IDENTIFICADOR
+| BOOLEANO
+| ENTERO
+| REAL
+;
+
+declaracion_procedimiento_funcion: PROCEDIMIENTO IDENTIFICADOR
+| PROCEDIMIENTO IDENTIFICADOR lista_parametros_formales
+| FUNCION IDENTIFICADOR
+| FUNCION IDENTIFICADOR ':' identificador_tipo
+| FUNCION IDENTIFICADOR lista_parametros_formales ':' identificador_tipo
+;
+
+lista_parametros_formales: '(' IDENTIFICADOR ':' identificador_tipo ')'
+| '(' VARIABLE IDENTIFICADOR ':' identificador_tipo ')'
+| '(' VARIABLE IDENTIFICADOR ',' IDENTIFICADOR ':' identificador_tipo ')' #la CLAUSURA
+| '(' IDENTIFICADOR ',' IDENTIFICADOR ':' identificador_tipo ')'
+| '(' IDENTIFICADOR ':' identificador_tipo ';' IDENTIFICADOR ':' identificador_tipo ')'
+//no esta completa y falta clausura 
+
+sentencia: identificador_variable ASIGNACION expresion
+| identificador_funcion ASIGNACION expresion
+| identificador_procedimiento
+| identificador_procedimiento lista_parametros_actuales
+| SI expresion ENTONCES sentencia
+| SI expresion ENTONCES sentencia SINO sentencia
+| MIENTRAS expresion HACER sentencia
+| PARA identificador_variable ASIGNACION expresion ABAJO expresion HACER sentencia
+| PARA identificador_variable ASIGNACION expresion A expresion HACER sentencia
+//COMO HAGO LA PALABRA VACIA
+;
+
+expresion: expresion_simple
+| expresion_simple '=' expresion_simple
+| expresion_simple '<' expresion_simple
+| expresion_simple '>' expresion_simple
+| expresion_simple DISTINTO expresion_simple
+| expresion_simple MENOR_IGUAL expresion_simple
+| expresion_simple MAYOR_IGUAL expresion_simple
+;
+
+expresion_simple: termino
+| '+' termino
+| '-' termino
+| termino '+' termino
+| termino '-' termino
+| termino O termino
+| '+' termino '+' termino
+| '+' termino '-' termino
+| '+' termino O termino
+| '-' termino '+' termino
+| '-' termino '-' termino
+| '-' termino O termino
+//falta la clausura
+;
+
+termino: factor
+| factor '*' factor
+| factor '/' factor
+| factor DIVIDIR factor
+| factor MODULO factor
+| factor Y factor
+//PREGUNTAR CLAUSURA
+;
+
+constante: + identificador_constante
+| '+' numero_sin_signo
+| '-' identificador_constante
+| '-' numero_sin_signo
+| identificador_constante
+| numero_sin_signo
+;
+
+factor: constante_sin_signo
+| identificador_variable
+| identificador_funcion
+| identificador_funcion lista_parametros_actuales
+| '(' expresion ')'
+| NO factor
+;
+
+constante_sin_signo: identificador_constante
+| numero_sin_signo
+;
+
+lista_parametros_actuales: '(' identificador_variable ')'
+| '(' expresion ')'
+| '(' identificador_procedimiento ')'
+| '(' identificador_funcion ')'
+//no esta completa
+
 %%
 
 void yyerror(char *s)
