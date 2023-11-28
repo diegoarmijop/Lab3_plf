@@ -37,7 +37,16 @@ programa_aux: IDENTIFICADOR
 | IDENTIFICADOR ',' programa_aux
 ;
 
-bloque: ;
+bloque: bloque_inicio
+;
+
+bloque_declaracion: declaracion_procedimiento_funcion ';' IDENTIFICADOR ';' bloque_declaracion ; 
+
+bloque_inicio: INICIO bloque_inicio_aux FIN ;
+
+bloque_inicio_aux: sentencia
+| sentencia ';' bloque_inicio_aux
+;
 
 constante: '+' identificador_constante
 | '+' numero_sin_signo
@@ -94,7 +103,34 @@ lista_parametros_formales_aux2: lista_parametros_formales_aux1 ':' identificador
 | VARIABLE lista_parametros_formales_aux1 ':' identificador_tipo lista_parametros_formales_aux2
 ;
 
-sentencia: 
+sentencia: identificador_variable ASIGNACION expresion
+| identificador_funcion ASIGNACION expresion
+| identificador_procedimiento
+| identificador_procedimiento lista_parametros_actuales
+| INICIO sentencia_inicio FIN
+| SI expresion ENTONCES sentencia
+| SI expresion ENTONCES sentencia SINO sentencia
+| CASO expresion DE sentencia_caso2 FIN
+| MIENTRAS expresion HACER sentencia
+| REPETIR sentencia_repetir HASTA expresion
+| PARA identificador_variable ASIGNACION expresion ABAJO expresion HACER sentencia
+| PARA identificador_variable ASIGNACION expresion A expresion HACER sentencia
+;
+
+sentencia_repetir: sentencia
+| sentencia ';' sentencia_repetir
+;
+
+sentencia_caso1: constante
+| constante ',' sentencia_caso1
+;
+
+sentencia_caso2: sentencia_caso1 ':' sentencia
+| sentencia_caso1 ':' sentencia ';' sentencia_caso2
+;
+
+sentencia_inicio: sentencia
+| sentencia ';' sentencia_inicio
 ;
 
 expresion: expresion_simple
