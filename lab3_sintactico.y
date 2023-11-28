@@ -12,6 +12,19 @@ void yyerror(char *s);
 %token IDENTIFICADOR ENTERO DECIMAL EXPONENCIAL 
 
 //falta agregar las prioridades. 
+%left INICIO 
+%right '=' ASIGNACION
+%left O Y
+%right NO
+%left '<' '>' DISTINTO MENOR_IGUAL MAYOR_IGUAL
+%left SI SINO MIENTRAS PARA REPETIR CASO
+%right ENTONCES DE : HACER HASTA ABAJO A 
+%left '-' '+'
+%left '/' '*' DIVIDIR MODULO RANGO
+%right ','
+%token '(' ')'
+%rigth FIN
+%right ';' '.' '\n'
 
 %% 
 input: /*vacío*/
