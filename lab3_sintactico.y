@@ -37,10 +37,40 @@ programa_aux: IDENTIFICADOR
 | IDENTIFICADOR ',' programa_aux
 ;
 
-bloque: bloque_inicio
+bloque: bloque_constante
+| bloque_tipo
+| bloque_variable
+| bloque_declaracion 
+| bloque_inicio
 ;
 
-bloque_declaracion: declaracion_procedimiento_funcion ';' IDENTIFICADOR ';' bloque_declaracion ; 
+bloque_constante: CONSTANTE bloque_constante_aux;
+
+bloque_constante_aux: IDENTIFICADOR '=' constante ';' bloque_constante_aux
+| IDENTIFICADOR '=' constante ';'
+;
+
+bloque_tipo: TIPO bloque_tipo_aux;
+
+bloque_tipo_aux: IDENTIFICADOR '=' tipo ';' bloque_tipo_aux
+| IDENTIFICADOR '=' tipo ';'
+;
+
+bloque_variable: VARIABLE bloque_variable_aux;
+
+bloque_variable_aux: bloque_variable_auxDos ':' tipo ';' bloque_variable_aux
+| bloque_variable_auxDos ':' tipo ';'
+;
+
+bloque_variable_auxDos: IDENTIFICADOR ',' bloque_variable_auxDos
+| IDENTIFICADOR
+;
+
+bloque_declaracion: declaracion_procedimiento_funcion ';' IDENTIFICADOR ';' bloque_declaracion
+| declaracion_procedimiento_funcion ';' IDENTIFICADOR ';'
+| declaracion_procedimiento_funcion ';' bloque ';' bloque_declaracion
+| declaracion_procedimiento_funcion ';' bloque ';'
+; 
 
 bloque_inicio: INICIO bloque_inicio_aux FIN ;
 
