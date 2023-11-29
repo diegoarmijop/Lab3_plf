@@ -11,7 +11,6 @@ void yyerror(char *s);
 %token ADELANTE FUNCION INICIO FIN SI ENTONCES SINO CASO DE MIENTRAS HACER PARA A ABAJO REPETIR HASTA O DIVIDIR MODULO Y NO
 %token IDENTIFICADOR ENTERO DECIMAL EXPONENCIAL 
 
-//falta agregar las prioridades. 
 %left INICIO 
 %right '=' ASIGNACION
 %left O Y
@@ -90,9 +89,7 @@ bloque_variable_auxDos: IDENTIFICADOR ',' bloque_variable_auxDos
 | IDENTIFICADOR
 ;
 
-bloque_declaracion: declaracion_procedimiento_funcion ';' IDENTIFICADOR ';' bloque_declaracion
-| declaracion_procedimiento_funcion ';' IDENTIFICADOR ';'
-| declaracion_procedimiento_funcion ';' bloque ';' bloque_declaracion
+bloque_declaracion: declaracion_procedimiento_funcion ';' IDENTIFICADOR ';'
 | declaracion_procedimiento_funcion ';' bloque ';'
 ; 
 
@@ -169,6 +166,7 @@ sentencia: identificador_variable ASIGNACION expresion
 | REPETIR sentencia_repetir HASTA expresion
 | PARA identificador_variable ASIGNACION expresion ABAJO expresion HACER sentencia
 | PARA identificador_variable ASIGNACION expresion A expresion HACER sentencia
+| 
 ;
 
 sentencia_repetir: sentencia
