@@ -17,12 +17,12 @@ void yyerror(char *s);
 %right NO
 %left '<' '>' DISTINTO MENOR_IGUAL MAYOR_IGUAL
 %left SI SINO MIENTRAS PARA REPETIR CASO
-%right ENTONCES DE : HACER HASTA ABAJO A 
+%right ENTONCES DE ':' HACER HASTA ABAJO A 
 %left '-' '+'
 %left '/' '*' DIVIDIR MODULO RANGO
 %right ','
 %token '(' ')'
-%rigth FIN
+%right FIN
 %right ';' '.' '\n'
 
 %% 
