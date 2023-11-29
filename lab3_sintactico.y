@@ -3,7 +3,7 @@
 #include <stdlib.h>
 extern int yylex();
 extern FILE *yyin;
-//extern int yylineno; cuenta las lineas. 
+extern int yylineno; 
 void yyerror(char *s);
 %}
 
@@ -27,18 +27,7 @@ void yyerror(char *s);
 
 %% 
 input: /*vacío*/
-| input line
-;
-
-line: exp '\n'
-| exp FIN      
-| '\n'
-;
-
-exp: ENTERO 
-| DECIMAL 
-| EXPONENCIAL
-| IDENTIFICADOR
+      | programa
 ;
 
 programa: PROGRAMA IDENTIFICADOR ';' bloque '.'
@@ -241,8 +230,11 @@ lista_parametros_actuales_aux: identificador_variable
 
 %%
 
+
+
 void yyerror(char *s)
 {
+printf("Error en la l%cnea n%cmero: %d\n",161,163,yylineno);
 exit(1);
 }
 
