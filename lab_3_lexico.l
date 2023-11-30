@@ -37,10 +37,10 @@
 "modulo"         { return MODULO; }
 "y"              { return Y; }
 "no"             { return NO; }
+//agregar simbolos
 [a-zA-Z][a-zA-Z0-9]* { return IDENTIFICADOR; }
 [0-9]+           { return ENTEROS; }
 [0-9]+,[0-9]+    { return DECIMAL; }
 [0-9]+,[0-9]+?E[+-]?[0-9]+ { return EXPONENCIAL; }
 [ \t\r\n]+       { /* ignorar espacios en blanco */ }
-.                { /* ignorar otros caracteres */ }
 %%

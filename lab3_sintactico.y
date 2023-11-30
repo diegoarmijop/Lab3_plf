@@ -11,19 +11,11 @@ void yyerror(char *s);
 %token ADELANTE FUNCION INICIO FIN SI ENTONCES SINO CASO DE MIENTRAS HACER PARA A ABAJO REPETIR HASTA O DIVIDIR MODULO Y NO
 %token IDENTIFICADOR ENTEROS DECIMAL EXPONENCIAL 
 
-%left INICIO 
-%right '=' ASIGNACION
 %left O Y
 %right NO
-%left '<' '>' DISTINTO MENOR_IGUAL MAYOR_IGUAL
-%left SI SINO MIENTRAS PARA REPETIR CASO
-%right ENTONCES DE ':' HACER HASTA ABAJO A 
+%right ':' //revisar
 %left '-' '+'
 %left '/' '*' DIVIDIR MODULO RANGO
-%right ','
-%token '(' ')'
-%right FIN
-%right ';' '.' '\n'
 
 %% 
 input: /*vacío*/
