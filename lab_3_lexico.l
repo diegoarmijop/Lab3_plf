@@ -14,7 +14,6 @@
 "entero"         { return ENTERO; }
 "real"           { return REAL; }
 "booleano"       { return BOOLEANO; }
-"caracter"       { return CARACTER; }
 "procedimiento"  { return PROCEDIMIENTO; }
 "adelante"       { return ADELANTE; }
 "funcion"        { return FUNCION; }
@@ -37,10 +36,29 @@
 "modulo"         { return MODULO; }
 "y"              { return Y; }
 "no"             { return NO; }
-//agregar simbolos
-[a-zA-Z][a-zA-Z0-9]* { return IDENTIFICADOR; }
+\;               { return ';';}
+\.               { return '.';}
+\=               { return '=';}
+\:               { return ':';}
+\,               { return ',';}
+\+               { return '+';}
+\-               { return '-';}
+
+\(               { return '(';}
+\)               { return ')';}
+\<               { return '<';}
+\>               { return '>';}
+\*               { return '*';}
+\/               { return '/';}
+\..              { return RANGO;}
+\:=              { return ASIGNACION;}
+\<=              { return MENOR_IGUAL;}
+\<>              { return DISTINTO;}
+\>=              { return MAYOR_IGUAL;}
+
+([a-z]|[A-Z])([a-z]|[A-Z]|[0-9])* { return IDENTIFICADOR; }
 [0-9]+           { return ENTEROS; }
-[0-9]+,[0-9]+    { return DECIMAL; }
-[0-9]+,[0-9]+?E[+-]?[0-9]+ { return EXPONENCIAL; }
+([0-9]+)(,[0-9]+)    { return DECIMAL; }
+([0-9]+)(,[0-9]+)?E(\+|\-)?([0-9]+) { return EXPONENCIAL; }
 [ \t\r\n]+       { /* ignorar espacios en blanco */ }
 %%
