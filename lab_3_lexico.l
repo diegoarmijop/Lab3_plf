@@ -11,7 +11,7 @@
 "constante"      { return CONSTANTE; }
 "tipo"           { return TIPO; }
 "variable"       { return VARIABLE; }
-"enteros"        { return ENTEROS; }
+"entero"         { return ENTERO; }
 "real"           { return REAL; }
 "booleano"       { return BOOLEANO; }
 "caracter"       { return CARACTER; }
@@ -38,7 +38,7 @@
 "y"              { return Y; }
 "no"             { return NO; }
 [a-zA-Z][a-zA-Z0-9]* { return IDENTIFICADOR; }
-[0-9]+           { return ENTERO; }
+[0-9]+           { return ENTEROS; }
 [0-9]+,[0-9]+    { return DECIMAL; }
 [0-9]+,[0-9]+?E[+-]?[0-9]+ { return EXPONENCIAL; }
 [ \t\r\n]+       { /* ignorar espacios en blanco */ }
