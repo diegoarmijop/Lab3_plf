@@ -19,7 +19,7 @@ void yyerror(char *s);
 
 %% 
 input: /*vacío*/
-      | dec_pf
+      | sent
 ;
 
 //identificador constante
@@ -147,6 +147,42 @@ dec_pf: PROCEDIMIENTO IDENTIFICADOR
 | FUNCION IDENTIFICADOR
 | FUNCION IDENTIFICADOR ':' id_tipo
 | FUNCION IDENTIFICADOR list_pf ':' id_tipo
+;
+
+//sentencia-inicio aux
+sen_ini: sent
+| sent ';' sen_ini
+;
+
+//sentencia-caso aux1
+sen_cas1: const
+| const ',' sen_cas1
+;
+
+//sentencia-caso aux2
+sen_cas2: sen_cas1 ':' sent
+| sen_cas1 ':' sent ';' sen_cas2
+;
+
+//sentencia-repetir aux
+sen_rep: sent
+| sent ';' sen_rep
+;
+
+//sentencia
+sent: id_var ASIGNACION exp
+| id_fun ASIGNACION exp
+| id_proc
+| id_proc list_pa
+| INICIO sen_ini FIN
+| SI exp ENTONCES sent
+| SI exp ENTONCES sent SINO sent
+| CASO exp DE sen_cas2 FIN
+| MIENTRAS exp HACER sent
+| REPETIR sen_rep HASTA exp
+| PARA id_var ASIGNACION exp ABAJO exp HACER sent
+| PARA id_var ASIGNACION exp A exp HACER sent
+| 
 ;
 
 %%
