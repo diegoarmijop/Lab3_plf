@@ -19,8 +19,91 @@ void yyerror(char *s);
 
 %% 
 input: /*vacío*/
-      | sent
+      | prog
 ;
+
+
+//programa
+prog: PROGRAMA IDENTIFICADOR ';' blq '.'
+| PROGRAMA IDENTIFICADOR '(' prog2 ')' ';' blq '.'
+;
+
+
+//programa2
+prog2: IDENTIFICADOR
+| IDENTIFICADOR ',' prog2
+;
+
+
+//bloque
+blq: blqcte blqini
+| blqtipo blqini
+| blqvar blqini
+| blqdecl blqini
+| blqcte blqtipo blqini
+| blqcte blqvar blqini
+| blqcte blqdecl blqini
+| blqtipo blqvar blqini
+| blqtipo blqdecl blqini
+| blqvar blqdecl blqini
+| blqcte blqtipo blqvar blqini
+| blqcte blqtipo blqdecl blqini
+| blqcte blqvar blqdecl blqini
+| blqtipo blqvar blqdecl blqini
+| blqcte blqtipo blqvar blqdecl blqini
+| blqini
+;
+
+
+//bloque_constante
+blqcte: CONSTANTE blqcte2;
+
+
+//bloque_constante2
+blqcte2: IDENTIFICADOR '=' const ';' blqcte2
+| IDENTIFICADOR '=' const ';'
+;
+
+
+//bloque_tipo
+blqtipo: TIPO blqtipo2;
+
+//bloque_tipo2
+blqtipo2: IDENTIFICADOR '=' tipo ';' blqtipo2
+| IDENTIFICADOR '=' tipo ';'
+;
+
+
+//bloque_variable
+blqvar: VARIABLE blqvar2;
+
+//bloque_variable2
+blqvar2: blqvar3 ':' tipo ';' blqvar2
+| blqvar3 ':' tipo ';'
+;
+
+//bloque_variable3
+blqvar3: IDENTIFICADOR ',' blqvar3
+| IDENTIFICADOR
+;
+
+
+//bloque_declaracion
+blqdecl: dec_pf ';' IDENTIFICADOR ';' blqdecl
+| dec_pf ';' IDENTIFICADOR ';'
+| dec_pf ';' blq ';' blqdecl
+| dec_pf ';' blq ';'
+;
+
+
+//bloque_inicio
+blqini: INICIO blqini2 FIN ;
+
+//bloque_inicio2
+blqini2: sent
+| sent ';' blqini2
+;
+
 
 //identificador constante
 id_const: IDENTIFICADOR;
