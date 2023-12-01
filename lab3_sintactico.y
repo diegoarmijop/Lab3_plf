@@ -19,7 +19,7 @@ void yyerror(char *s);
 
 %% 
 input: /*vacío*/
-      | list_pf
+      | dec_pf
 ;
 
 //identificador constante
@@ -76,9 +76,80 @@ list_pfb: list_pfa ':' id_tipo
 | VARIABLE list_pfa ':' id_tipo ';' list_pfb
 ;
 
+//lista parametros actuales
+list_pa: '(' list_pa2')' ;
+
+//lista parametros actuales aux
+list_pa2: id_var
+| id_var ',' list_pa2
+| exp
+| exp ',' list_pa2
+| id_proc
+| id_proc ',' list_pa2
+| id_fun
+| id_fun ',' list_pa2
+;
+
+//exp_aux = expresion simple aux
+exp_aux: '+' termino exp_aux
+| '-' termino exp_aux
+| O termino exp_aux
+| 
+;
+
+termino: factor term_aux;
+
+//term_aux = termino_aux
+term_aux: '*' factor term_aux
+| '/' factor term_aux
+| DIVIDIR factor term_aux
+| MODULO factor term_aux
+| Y factor term_aux
+| 
+;
+
+factor: cons_ss
+| id_var
+| id_fun
+| id_fun list_pa
+| '(' exp ')'
+| NO factor
+;
+
+//exp = expresion 
+exp: exp_s
+| exp_s '=' exp_s
+| exp_s '<' exp_s
+| exp_s '>' exp_s
+| exp_s DISTINTO exp_s
+| exp_s MENOR_IGUAL exp_s
+| exp_s MAYOR_IGUAL exp_s
+;
+
+//exp_s = expresion_simple
+exp_s: termino exp_aux
+| '+' termino exp_aux
+| '-' termino exp_aux
+;
+
+tipo: id_tipo
+| '(' tipo_aux ')'
+| const RANGO const
+;
+
+tipo_aux: IDENTIFICADOR
+| IDENTIFICADOR ',' tipo_aux
+;
+
+//declaracion procedimiento funcion
+dec_pf: PROCEDIMIENTO IDENTIFICADOR
+| PROCEDIMIENTO IDENTIFICADOR list_pf
+| FUNCION IDENTIFICADOR
+| FUNCION IDENTIFICADOR ':' id_tipo
+| FUNCION IDENTIFICADOR list_pf ':' id_tipo
+;
+
 %%
-
-
 
 void yyerror(char *s)
 {
