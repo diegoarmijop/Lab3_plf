@@ -15,7 +15,6 @@
 "real"           { return REAL; }
 "booleano"       { return BOOLEANO; }
 "procedimiento"  { return PROCEDIMIENTO; }
-"adelante"       { return ADELANTE; }
 "funcion"        { return FUNCION; }
 "inicio"         { return INICIO; }
 "fin"            { return FIN; }
@@ -43,18 +42,17 @@
 \,               { return ',';}
 \+               { return '+';}
 \-               { return '-';}
-
 \(               { return '(';}
 \)               { return ')';}
 \<               { return '<';}
 \>               { return '>';}
 \*               { return '*';}
 \/               { return '/';}
-\..              { return RANGO;}
-\:=              { return ASIGNACION;}
-\<=              { return MENOR_IGUAL;}
-\<>              { return DISTINTO;}
-\>=              { return MAYOR_IGUAL;}
+".."              { return RANGO;}
+":="              { return ASIGNACION;}
+"<="              { return MENOR_IGUAL;}
+"<>"              { return DISTINTO;}
+">="              { return MAYOR_IGUAL;}
 
 ([a-z]|[A-Z])([a-z]|[A-Z]|[0-9])* { return IDENTIFICADOR; }
 [0-9]+           { return ENTEROS; }
