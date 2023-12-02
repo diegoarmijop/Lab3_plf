@@ -1,0 +1,5 @@
+programa hola1; 
+procedimiento hola2;
+aux;
+inicio caso no hola3 (hola4 dividir hola5) <> (hola5 * hola4) de 123 : hola6 fin fin.
+

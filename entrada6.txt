@@ -1,0 +1,12 @@
+programa hola1; 
+funcion hola2 (hola3, hola4 : booleano) : booleano;
+aux;
+inicio mientras hola5 / hola6 y hola7 modulo hola8 >= hola5 * hola6 hacer
+si contador > 100 entonces
+contador := -100
+sino para contador :=  hola9 abajo hola10 hacer
+repetir contador := contador - 10 hasta contador <= 0 fin.
+
+
+
+

@@ -1,5 +1,10 @@
-programa hola23 ( chao234 ) ; constante moneda = + decambio43 ;
-billete = - 654 ; es432jh = 343234 ; terra85 = + 543,34 ;
-qwerty = - 34,48 ; jfgh = 465E273 ; ghjsad = + 54E12 ;
-tipo lunaroja  = ( a2 , a3 ) ; variable grien34jaus : + 543 .. 98 ;
+programa hola23 ( chao234 ) ; 
+constante moneda = + decambio43 ;
+billete = - 654 ; es432jh = 343234 ; 
+terra85 = + 543,34 ;
+qwerty = - 34,48 ; 
+jfgh = 465E273 ; 
+ghjsad = + 54E12 ;
+tipo lunaroja  = ( a2 , a3 ) ; 
+variable grien34jaus : + 543 .. 98 ;
 inicio caso + 65 * 768 / 345 dividir 809 modulo 12 y gtfr78 > - 65 de + 7 : fin fin .

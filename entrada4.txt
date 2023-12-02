@@ -1,0 +1,10 @@
+programa hola1 (var1, var2); 
+tipo hola2 =  hola3;
+hola4 = entero;
+hola5 = booleano;
+hola6 = real;
+hola7 = hola2;
+variable hola8 : -1987 .. -1987,5;
+hola9 : 15E+10 .. -1987;
+inicio 
+si 123 o 120 < hola4 entonces hola4 := 246 fin.
