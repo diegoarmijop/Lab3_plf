@@ -1,0 +1,6 @@
+programa LOL367
+( LOL2 , sisisisi , nononono ) ;
+constante djdhdhdh = + 8888 ;
+tipo LOL3 = booleano ; 
+variable LEL : real ; 
+inicio LOL6666 ( LOL3 ) fin . 

@@ -1,0 +1,1 @@
+programa LOL1 ; tipo PLF = ( IDe ) ; inicio LOL2 := 34 fin .

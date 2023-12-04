@@ -1,0 +1,4 @@
+programa YEAH 
+( LOL1 , SINOL34 , LOL2 ) ;
+constante LOL3 = - 3333333 ;
+inicio LOL4 := + LOL45 fin . 

@@ -1,0 +1,3 @@
+programa YEAH ( LITE , OSE ) ;
+procedimiento LOL1 ( variable LOL2 : booleano ) ; YEh ;
+inicio inicio LOL3 := + 567899 fin fin .

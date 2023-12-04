@@ -1,0 +1,6 @@
+programa LOL2 
+( LOL23 , YEAH , sjsjsjs ) ; 
+tipo IDEN444dsjdj = ( LOl3 ) ; 
+variable dsjdjdjdj : entero ; 
+inicio si - 44444 entonces LOL3 := + 66666 
+fin .

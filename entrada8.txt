@@ -1,0 +1,4 @@
+programa RAYO1 ( RED ) ;
+variable LOLL : ( CHESSE ) ; 
+inicio caso 
+- LOL1 de - 56868 : LOL1 := + 5677 fin fin .
